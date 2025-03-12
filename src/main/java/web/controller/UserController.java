@@ -15,6 +15,11 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
+    @GetMapping({"", "/"}) // <-- теперь обрабатывает и /user
+    public String home() {
+        return "redirect:/user/list"; // Редирект на список пользователей
+    }
+
     @GetMapping("/list")
     public String listUsers(Model model) {
         List<User> users = userRepository.findAll();
@@ -23,13 +28,13 @@ public class UserController {
     }
 
     @GetMapping("/add")
-    public String showAddUserForm(Model model) {
+    public String showAddUserForm(Model model) {  // Убрал /user/add -> /add
         model.addAttribute("user", new User());
         return "addUser";
     }
 
     @PostMapping("/add")
-    public String addUser(@ModelAttribute User user) {
+    public String addUser(@ModelAttribute User user) {  // Убрал /user/add -> /add
         userRepository.save(user);
         return "redirect:/user/list";
     }
@@ -53,3 +58,4 @@ public class UserController {
         return "redirect:/user/list";
     }
 }
+

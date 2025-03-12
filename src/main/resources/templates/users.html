@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Users List</title>
 </head>
@@ -17,7 +17,7 @@
         <td th:text="${user.name}"></td>
         <td th:text="${user.email}"></td>
         <td>
-            <a th:href="@{/user/edit/{id}(id=${user.id})}">Edit</a> <!-- Исправлено на правильный путь -->
+            <a th:href="@{/user/edit/{id}(id=${user.id})}">Edit</a>
             <form th:action="@{/user/delete}" method="post">
                 <input type="hidden" name="id" th:value="${user.id}"/>
                 <button type="submit">Delete</button>
